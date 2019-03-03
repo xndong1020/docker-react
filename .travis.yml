@@ -1,0 +1,17 @@
+# need super level permission
+sudo: required
+
+# install a copy of docker
+services:
+  - docker
+
+# tasks before test or deployment
+before_install:
+  - docker build -t isdance/docker-react -f Dockerfile.dev .
+
+# npm run test override default startup command
+script:
+  - docker run isdance/docker-react npm run test -- --coverage
+
+
+
